@@ -1,3 +1,4 @@
+WMS
 # Eigi Skills
 
 Reusable Codex skills for Eigi engineering workflows.
