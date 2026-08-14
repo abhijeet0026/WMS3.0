@@ -1,54 +1,256 @@
-WMS
-# Eigi Skills
+# Warehouse Management System 2.0 (WMS 2.0)
 
-Reusable Codex skills for Eigi engineering workflows.
+A comprehensive warehouse management solution featuring an intelligent AI assistant, role-based access control, real-time inventory tracking, and streamlined receiving, shipping, and reconciliation operations.
 
-This repo stores shared standards under `.codex/skills/` so they can be copied into any Eigi repo and used by Codex when creating, modifying, reviewing, or testing app code.
+## 📋 Features
 
-## Available Skills
+- **AI-Powered Assistant**: GenAI chatbot integration for intelligent warehouse operations support
+- **Role-Based Access Control (RBAC)**: Fine-grained permission management with multiple user roles
+- **Barcode Scanning**: Fast and efficient item tracking via barcode input
+- **Inventory Management**: Real-time inventory tracking and reconciliation
+- **Receiving & Shipping**: Streamlined workflows for receiving shipments and fulfilling orders
+- **Audit Logging**: Comprehensive audit trail for compliance and operations monitoring
+- **Dashboard**: Real-time operational metrics and insights
+- **Responsive UI**: Modern React-based frontend with TypeScript for type safety
 
-- `.codex/skills/eigi-backend-standards`: Backend API standards for Python/FastAPI-style services, folder structure, routes, controllers, CRUD, services, logging, docstrings, tests, and backend `.gitignore` hygiene.
-- `.codex/skills/eigi-frontend-standards`: Frontend web app standards for routes/pages, feature components, shared UI, API clients, hooks/stores, styling, tests, environment handling, and frontend `.gitignore` hygiene.
+## 🏗️ Project Structure
 
-## How To Use
-
-Copy the `.codex/skills/` folder into the target Eigi repo. Then add a short durable note to the repo's agent guide so Codex knows when to use the skills.
-
-Use this short snippet in the target repo's `AGENT.md` or `AGENTS.md`:
-
-```markdown
-## Eigi Skills
-
-Use `.codex/skills/eigi-backend-standards` for Eigi backend API work.
-It guides route, controller, CRUD, service, schema, model, logging, docstring, test, and backend `.gitignore` standards.
-Use `.codex/skills/eigi-frontend-standards` for Eigi frontend web app work.
-It guides route/page, feature component, shared UI, API client, hook/store, styling, test, env, and frontend `.gitignore` standards.
-Inspect nearby code first and follow the closest local convention.
-Read the matching `SKILL.md` first and load references only when needed.
+```
+wms2.0/
+├── backend/                          # Python FastAPI backend
+│   ├── main.py                      # Application entry point
+│   ├── requirements.txt             # Python dependencies
+│   ├── seed.py                      # Database seeding script
+│   ├── commons/                     # Shared utilities
+│   │   ├── auth.py                 # Authentication logic
+│   │   ├── logger.py               # Logging configuration
+│   │   └── rbac.py                 # Role-based access control
+│   ├── core/                        # Core application logic
+│   │   ├── apis/                   # API endpoints
+│   │   │   ├── routes/             # API route definitions
+│   │   │   │   ├── assistant_routes.py
+│   │   │   │   ├── auth_routes.py
+│   │   │   │   ├── inventory_routes.py
+│   │   │   │   ├── receiving_routes.py
+│   │   │   │   ├── shipping_routes.py
+│   │   │   │   ├── audit_routes.py
+│   │   │   │   └── migration_routes.py
+│   │   │   └── schemas/            # Request/response schemas
+│   │   ├── audit/                  # Audit logging
+│   │   ├── controllers/            # Business logic controllers
+│   │   ├── cruds/                  # Database CRUD operations
+│   │   ├── database/               # Database configuration
+│   │   ├── models/                 # SQLAlchemy models
+│   │   └── services/               # Business services
+│   │       └── genai_chatbot/      # AI assistant service
+│   ├── logs/                        # Application logs
+│   └── tests/                       # Backend tests
+│       ├── conftest.py
+│       ├── test_core_operations.py
+│       └── test_rbac_*.py
+│
+├── frontend/                        # React TypeScript frontend
+│   ├── index.html
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── vite.config.ts
+│   ├── public/                      # Static assets
+│   └── src/
+│       ├── App.tsx
+│       ├── main.tsx
+│       ├── api/                     # API client
+│       ├── components/              # React components
+│       │   ├── app/                 # App-specific components
+│       │   ├── marketing/           # Marketing components
+│       │   └── shared/              # Shared UI components
+│       ├── context/                 # React context (state management)
+│       ├── hooks/                   # Custom React hooks
+│       ├── layouts/                 # Page layouts
+│       ├── pages/                   # Page components
+│       ├── styles/                  # CSS stylesheets
+│       └── types/                   # TypeScript type definitions
+│
+└── README.md                        # This file
 ```
 
-## Skill Layout
+## 🚀 Getting Started
 
-```text
-.codex/skills/
-  eigi-backend-standards/
-    SKILL.md
-    references/
-      folder-structure.md
-      examples.md
-  eigi-frontend-standards/
-    SKILL.md
-    references/
-      folder-structure.md
+### Prerequisites
+
+**Backend:**
+- Python 3.8 or higher
+- pip (Python package manager)
+
+**Frontend:**
+- Node.js 16 or higher
+- npm or yarn package manager
+
+### Installation
+
+#### Backend Setup
+
+1. Navigate to the backend directory:
+```bash
+cd backend
 ```
 
-## Validation
+2. Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-After editing a skill, run:
+3. Configure environment variables:
+Create a `.env` file in the backend directory with required configurations:
+```env
+DATABASE_URL=sqlite:///./warehouse.db
+SECRET_KEY=your-secret-key-here
+```
+
+4. Initialize the database:
+```bash
+python seed.py
+```
+
+#### Frontend Setup
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create environment configuration (if needed):
+Create a `.env` file in the frontend directory:
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+## 🏃 Running the Application
+
+### Start Backend Server
 
 ```bash
-python3 /Users/mrunmaychichkhede/.codex/skills/.system/skill-creator/scripts/quick_validate.py .codex/skills/eigi-backend-standards
-python3 /Users/mrunmaychichkhede/.codex/skills/.system/skill-creator/scripts/quick_validate.py .codex/skills/eigi-frontend-standards
+cd backend
+python main.py
+```
+
+The API will be available at `http://localhost:8000`
+API documentation (Swagger UI) will be at `http://localhost:8000/docs`
+
+### Start Frontend Development Server
+
+```bash
+cd frontend
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## 🧪 Testing
+
+### Backend Tests
+
+Run all tests:
+```bash
+cd backend
+pytest
+```
+
+Run specific test file:
+```bash
+pytest tests/test_rbac_manager.py
+```
+
+Run with coverage:
+```bash
+pytest --cov=core tests/
+```
+
+## 📝 API Routes
+
+### Authentication
+- `POST /auth/login` - User login
+- `POST /auth/logout` - User logout
+- `POST /auth/register` - Register new user
+
+### Inventory
+- `GET /inventory` - List inventory items
+- `GET /inventory/{item_id}` - Get item details
+- `PUT /inventory/{item_id}` - Update inventory item
+
+### Receiving
+- `POST /receiving/shipment` - Create receiving shipment
+- `GET /receiving/shipment/{shipment_id}` - Get shipment details
+- `PUT /receiving/shipment/{shipment_id}` - Update shipment status
+
+### Shipping
+- `POST /shipping/order` - Create shipping order
+- `GET /shipping/order/{order_id}` - Get order details
+- `PUT /shipping/order/{order_id}` - Update order status
+
+### Assistant
+- `POST /assistant/chat` - Chat with AI assistant
+- `GET /assistant/history` - Get chat history
+
+### Audit
+- `GET /audit/logs` - View audit logs
+- `GET /audit/logs/{entity_id}` - Get entity audit trail
+
+## 🔐 Authentication & Authorization
+
+The system uses JWT-based authentication with role-based access control (RBAC):
+
+**Roles:**
+- **Owner**: Full system access
+- **Manager**: Manage inventory, users, and operations
+- **Staff**: Perform warehouse operations (receiving, shipping)
+- **NewHire**: Limited read-only access
+
+Role permissions are enforced at the API route level via the `@require_permission` decorator.
+
+## 🔄 Key Components
+
+### Backend Services
+
+- **Authentication Service**: Handles user authentication and JWT token management
+- **RBAC Manager**: Manages roles, permissions, and access control
+- **Inventory Service**: Manages warehouse inventory
+- **GenAI Assistant Service**: Provides AI-powered chatbot functionality
+- **Audit Logger**: Tracks all system operations for compliance
+
+### Frontend Features
+
+- **AuthContext**: Global authentication state management
+- **RequireRole Component**: Route/component-level authorization
+- **usePermissions Hook**: Permission checking in components
+- **API Client**: Centralized HTTP client for backend communication
+- **Toast Notifications**: User feedback system
+
+## 📚 Additional Resources
+
+- **Backend Standards**: See `backend/` folder for code organization patterns
+- **Frontend Standards**: See `frontend/src/` folder for component structure
+- **Agent Configuration**: See `AGENT.md` for development guidelines
+
+## 🤝 Contributing
+
+1. Create a feature branch from `main`
+2. Make your changes following project conventions
+3. Write tests for new functionality
+4. Ensure all tests pass before submitting
+5. Create a pull request with detailed description
+
+## 📄 License
+
+[Add appropriate license information here]
+
+## 👥 Support
+
+For questions or issues, please [add contact information or issue tracker link]
 ```
 
 Keep skill instructions concise. Put detailed repeatable guidance in `SKILL.md` and only add reference files when the extra context should be loaded on demand.
