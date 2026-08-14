@@ -1,0 +1,27 @@
+﻿# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Node / frontend
+node_modules/
+.npm/
+.next/
+dist/
+build/
+
+# OS/editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

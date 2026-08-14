@@ -1,0 +1,32 @@
+:root {
+  /* Brand Tokens */
+  --color-ink: #1C1C1A;
+  --color-orange-primary: #FF6A13;
+  --color-orange-hover: #e05e11;
+  --color-white: #ffffff;
+  
+  /* Shared Base */
+  --radius-base: 4px;
+  --radius-pill: 9999px;
+
+  /* Font Stacks */
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-sans: 'IBM Plex Sans', 'Inter', sans-serif;
+  --font-display: 'Big Shoulders Display', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Base Inputs - used in both */
+input, select, textarea, button {
+  font-family: inherit;
+}

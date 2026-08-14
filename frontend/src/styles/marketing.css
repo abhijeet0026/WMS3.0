@@ -1,0 +1,434 @@
+/* marketing.css - Light Theme with 3D Isometric Scene */
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ─── Base Layout ─── */
+.landing-theme-wrapper {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  min-height: 100vh;
+  font-family: 'IBM Plex Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Marketing Header ─── */
+.marketing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.marketing-brand {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+}
+
+.marketing-brand .icon-container {
+  color: #ff5733; /* Orange/Red accent */
+}
+
+.marketing-brand-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #666;
+  display: block;
+  margin-top: -0.2rem;
+}
+
+.marketing-nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.marketing-nav-links a {
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.marketing-nav-links a:hover {
+  color: #ff5733;
+}
+
+.btn-contact {
+  background: linear-gradient(135deg, #ff6b4a, #ff401a);
+  color: #ffffff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(255, 87, 51, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 87, 51, 0.4);
+}
+
+/* ─── Hero Section (Split Layout) ─── */
+.marketing-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10rem 4rem 4rem 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ─── Left Column (Typography & CTA) ─── */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f3f4f6;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4b5563;
+  width: fit-content;
+}
+
+.hero-badge .icon-dot {
+  background: #1a1a1a;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 7.5rem;
+  line-height: 0.85;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero-title-accent {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #ff5733;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-secondary-outline {
+  background: transparent;
+  color: #1a1a1a;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid #e5e7eb;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.btn-secondary-outline:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* ─── Metric Cards ─── */
+.metrics-section {
+  margin-top: 3rem;
+}
+
+.metrics-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.metric-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ff5733;
+  line-height: 1;
+  margin: 0;
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.metric-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ─── Right Column (Isometric Scene Container) ─── */
+.isometric-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.isometric-scene {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  transform-style: preserve-3d;
+  /* Rotate to isometric view: rotateX(60deg) rotateZ(-45deg) */
+  transform: rotateX(60deg) rotateZ(-45deg);
+  transition: transform 0.5s ease;
+}
+
+/* Slight interactive tilt on container hover */
+.isometric-container:hover .isometric-scene {
+  transform: rotateX(62deg) rotateZ(-42deg);
+}
+
+/* ─── 3D Block Base ─── */
+.iso-block {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.iso-block::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.1);
+  transform: translateZ(-1px);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.iso-block:hover {
+  transform: translateZ(20px);
+}
+
+.iso-block:hover::after {
+  transform: translateZ(-21px);
+  filter: blur(12px);
+  background: rgba(0,0,0,0.05);
+}
+
+/* Block Faces (Left, Right, Top) */
+.iso-face {
+  position: absolute;
+  background: #ffffff;
+}
+
+.iso-top {
+  width: 100%;
+  height: 100%;
+  transform: translateZ(0);
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+}
+
+.iso-left {
+  width: 100%;
+  transform-origin: left;
+  transform: rotateY(-90deg);
+  background: #f3f4f6;
+  left: 0;
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.02);
+}
+
+.iso-right {
+  height: 100%;
+  transform-origin: bottom;
+  transform: rotateX(-90deg);
+  background: #e5e7eb;
+  bottom: 0;
+  box-shadow: inset -5px 5px 15px rgba(0,0,0,0.05);
+}
+
+/* ─── Details (Windows & Doors) ─── */
+.iso-window {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #1f2937;
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.iso-door {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background: #4b5563;
+  border-radius: 2px 2px 0 0;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+/* ─── Grid Base ─── */
+.iso-grid-base {
+  background: transparent;
+  border: none;
+}
+.iso-grid-top {
+  background-image: 
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-color: #f8f9fa;
+  border: 1px solid #e5e7eb;
+}
+
+/* ─── 2x2x2 Floating Translucent Red Cube ─── */
+.iso-compound-cube {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  transform-style: preserve-3d;
+  animation: float-compound 5s ease-in-out infinite;
+}
+
+.iso-sub-cube {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.iso-sub-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.sub-top {
+  transform: translateZ(35px);
+  background: rgba(255, 87, 51, 0.7);
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+.sub-left {
+  transform-origin: left;
+  transform: rotateY(-90deg);
+  left: 0;
+  background: rgba(255, 107, 74, 0.8);
+}
+
+.sub-right {
+  transform-origin: bottom;
+  transform: rotateX(-90deg);
+  bottom: 0;
+  background: rgba(204, 52, 20, 0.85);
+}
+
+@keyframes float-compound {
+  0% { transform: translateZ(20px) translateY(0px); }
+  50% { transform: translateZ(50px) translateY(-15px); }
+  100% { transform: translateZ(20px) translateY(0px); }
+}
+
+/* ─── Solid White Floating Cube ─── */
+.iso-floating-white {
+  animation: float-white 4.5s ease-in-out infinite 0.5s;
+}
+.iso-floating-white .iso-top { background: #ffffff; }
+.iso-floating-white .iso-left { background: #f3f4f6; }
+.iso-floating-white .iso-right { background: #e5e7eb; }
+
+@keyframes float-white {
+  0% { transform: translateZ(60px) translateY(0px); }
+  50% { transform: translateZ(90px) translateY(-10px); }
+  100% { transform: translateZ(60px) translateY(0px); }
+}
+
+/* Removed .iso-factory styles to use SVG warehouse instead */
+
+/* ─── 2D Crane ─── */
+.iso-crane {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform-style: preserve-3d;
+  /* Orient the 2D crane to stand up in the 3D space */
+  transform: rotateX(90deg) rotateY(45deg) translateZ(10px);
+}
+.iso-crane svg {
+  filter: drop-shadow(2px 5px 3px rgba(0,0,0,0.2));
+}
+

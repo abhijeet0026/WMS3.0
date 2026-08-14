@@ -51,3 +51,17 @@ python3 /Users/mrunmaychichkhede/.codex/skills/.system/skill-creator/scripts/qui
 ```
 
 Keep skill instructions concise. Put detailed repeatable guidance in `SKILL.md` and only add reference files when the extra context should be loaded on demand.
+
+## Test Credentials
+
+The application is seeded with a 7-account roster for testing different roles and facility scopes. The password for all accounts is `password123`.
+
+| Username | Password | Role | Facility Scope |
+| --- | --- | --- | --- |
+| `owner` | `password123` | Owner | *None (All)* |
+| `manager.reno` | `password123` | Manager | Reno |
+| `manager.columbus` | `password123` | Manager | Columbus |
+| `staff.reno` | `password123` | Trusted Staff | Reno |
+| `staff.columbus` | `password123` | Trusted Staff | Columbus |
+| `newhire.reno` | `password123` | New Hire | Reno |
+| `newhire.columbus` | `password123` | New Hire | Columbus |
