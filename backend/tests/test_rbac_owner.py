@@ -1,3 +1,19 @@
+from fastapi.testclient import TestClient
+from main import app
+
+
+def test_own_000_owner_email_login_with_standard_seed_password():
+    response = TestClient(app).post(
+        "/v1/auth/login",
+        json={"username": "dan.whitfield@whitfieldfulfillment.com", "password": "password123"},
+    )
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    assert payload["email"] == "dan.whitfield@whitfieldfulfillment.com"
+    assert payload["username"] == "dan_owner"
+    assert payload["role"] == "OWNER"
+
+
 def test_own_001_owner_login(owner_client):
     response = owner_client.get("/v1/auth/me")
     assert response.status_code == 200

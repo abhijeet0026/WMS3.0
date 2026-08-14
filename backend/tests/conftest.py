@@ -53,7 +53,7 @@ def client():
     with TestClient(app) as c:
         yield c
 
-def get_auth_client(username, password="admin123"):
+def get_auth_client(username, password="password123"):
     client = TestClient(app)
     response = client.post("/v1/auth/login", json={"username": username, "password": password})
     assert response.status_code == 200, f"Failed to login {username}: {response.text}"
@@ -64,28 +64,28 @@ def get_auth_client(username, password="admin123"):
 
 @pytest.fixture(scope="module")
 def owner_client():
-    return get_auth_client("dan_owner")  # api.py seed: dan_owner / admin123
+    return get_auth_client("dan_owner")  # api.py seed: dan_owner / password123
 
 @pytest.fixture(scope="module")
 def manager_reno_client():
-    return get_auth_client("manager_reno")  # api.py seed: manager_reno / admin123
+    return get_auth_client("manager_reno")  # api.py seed: manager_reno / password123
 
 @pytest.fixture(scope="module")
 def manager_columbus_client():
-    return get_auth_client("manager_columbus")  # api.py seed: manager_columbus / admin123
+    return get_auth_client("manager_columbus")  # api.py seed: manager_columbus / password123
 
 @pytest.fixture(scope="module")
 def staff_reno_client():
-    return get_auth_client("staff_reno")  # api.py seed: staff_reno / admin123
+    return get_auth_client("staff_reno")  # api.py seed: staff_reno / password123
 
 @pytest.fixture(scope="module")
 def staff_columbus_client():
-    return get_auth_client("staff_columbus")  # api.py seed: staff_columbus / admin123
+    return get_auth_client("staff_columbus")  # api.py seed: staff_columbus / password123
 
 @pytest.fixture(scope="module")
 def newhire_reno_client():
-    return get_auth_client("newhire_reno")  # api.py seed: newhire_reno / admin123
+    return get_auth_client("newhire_reno")  # api.py seed: newhire_reno / password123
 
 @pytest.fixture(scope="module")
 def newhire_columbus_client():
-    return get_auth_client("newhire_columbus")  # api.py seed: newhire_columbus / admin123
+    return get_auth_client("newhire_columbus")  # api.py seed: newhire_columbus / password123

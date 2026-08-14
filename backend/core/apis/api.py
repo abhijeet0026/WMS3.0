@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from commons.auth import hash_password
 from commons.logger import logger
 from core.database.database import Base, engine, session
 from core.models.wms_models import (
@@ -35,9 +36,23 @@ def seed_initial_data():
     Base.metadata.create_all(bind=engine)
 
     with session() as db:
-        # Check if already seeded
-        if db.query(User).first():
-            logging.info("Database already seeded. Skipping initial data seeding.")
+        demo_password = "password123"
+        existing_users = db.query(User).all()
+        if existing_users:
+            legacy_hashes = {"hashed_admin123", "admin123", "hashed_password123"}
+            needs_update = False
+            expected_demo_names = {
+                "owner", "dan_owner", "manager_reno", "manager_columbus", "staff_reno",
+                "staff_columbus", "newhire_reno", "newhire_columbus"
+            }
+            for user in existing_users:
+                if user.username in expected_demo_names or user.email in {"owner@whitfieldfulfillment.com", "dan.whitfield@whitfieldfulfillment.com"}:
+                    if user.password_hash != hash_password(demo_password):
+                        user.password_hash = hash_password(demo_password)
+                        needs_update = True
+            if needs_update:
+                db.commit()
+            logging.info("Database already seeded. Validated demo account credentials for the standard WMS login flow.")
             return
 
         now = datetime.now(timezone.utc)
@@ -50,31 +65,31 @@ def seed_initial_data():
         # 2. Users with Roles (1 Owner + 3 Reno Facility Roles + 3 Columbus Facility Roles)
         user_owner = User(
             id="USR-001", username="dan_owner", email="dan.whitfield@whitfieldfulfillment.com", full_name="Dan Whitfield (Business Owner)",
-            password_hash="hashed_admin123", role=UserRole.OWNER, facility_scope=None
+            password_hash=hash_password(demo_password), role=UserRole.OWNER, facility_scope=None
         )
         user_mgr_reno = User(
             id="USR-002", username="manager_reno", email="manager.reno@whitfieldfulfillment.com", full_name="Reno Facility Manager",
-            password_hash="hashed_admin123", role=UserRole.MANAGER, facility_scope="RENO"
+            password_hash=hash_password(demo_password), role=UserRole.MANAGER, facility_scope="RENO"
         )
         user_staff_reno = User(
             id="USR-003", username="staff_reno", email="staff.reno@whitfieldfulfillment.com", full_name="Reno Trusted Staff",
-            password_hash="hashed_admin123", role=UserRole.TRUSTED_STAFF, facility_scope="RENO"
+            password_hash=hash_password(demo_password), role=UserRole.TRUSTED_STAFF, facility_scope="RENO"
         )
         user_hire_reno = User(
             id="USR-005", username="newhire_reno", email="newhire.reno@whitfieldfulfillment.com", full_name="Reno New Hire Staff",
-            password_hash="hashed_admin123", role=UserRole.NEW_HIRE, facility_scope="RENO"
+            password_hash=hash_password(demo_password), role=UserRole.NEW_HIRE, facility_scope="RENO"
         )
         user_mgr_col = User(
             id="USR-006", username="manager_columbus", email="manager.columbus@whitfieldfulfillment.com", full_name="Columbus Facility Manager",
-            password_hash="hashed_admin123", role=UserRole.MANAGER, facility_scope="COLUMBUS"
+            password_hash=hash_password(demo_password), role=UserRole.MANAGER, facility_scope="COLUMBUS"
         )
         user_staff_col = User(
             id="USR-007", username="staff_columbus", email="staff.columbus@whitfieldfulfillment.com", full_name="Columbus Trusted Staff",
-            password_hash="hashed_admin123", role=UserRole.TRUSTED_STAFF, facility_scope="COLUMBUS"
+            password_hash=hash_password(demo_password), role=UserRole.TRUSTED_STAFF, facility_scope="COLUMBUS"
         )
         user_hire_col = User(
             id="USR-004", username="newhire_columbus", email="newhire.columbus@whitfieldfulfillment.com", full_name="Columbus New Hire Staff",
-            password_hash="hashed_admin123", role=UserRole.NEW_HIRE, facility_scope="COLUMBUS"
+            password_hash=hash_password(demo_password), role=UserRole.NEW_HIRE, facility_scope="COLUMBUS"
         )
         db.add_all([user_owner, user_mgr_reno, user_staff_reno, user_hire_reno, user_mgr_col, user_staff_col, user_hire_col])
 

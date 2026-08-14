@@ -148,7 +148,8 @@ cd frontend
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+The frontend application will be available at `http://localhost:3000`
+Login screen: `http://localhost:3000/login`
 
 ## 🧪 Testing
 
@@ -173,9 +174,12 @@ pytest --cov=core tests/
 ## 📝 API Routes
 
 ### Authentication
-- `POST /auth/login` - User login
-- `POST /auth/logout` - User logout
-- `POST /auth/register` - Register new user
+- `POST /v1/auth/login` - User login with username or email
+- `GET /v1/auth/me` - Fetch the current authenticated user
+- `GET /v1/auth/users` - List accessible user accounts
+- `POST /v1/auth/users` - Create a new user account
+- `PATCH /v1/auth/users/{user_id}/status` - Update user status
+- `PATCH /v1/auth/users/{user_id}/password` - Reset user password
 
 ### Inventory
 - `GET /inventory` - List inventory items
@@ -259,9 +263,14 @@ Keep skill instructions concise. Put detailed repeatable guidance in `SKILL.md` 
 
 The application is seeded with a 7-account roster for testing different roles and facility scopes. The password for all accounts is `password123`.
 
-| Username | Password | Role | Facility Scope |
+The owner demo account is also accepted using the Dan Whitfield email alias:
+- Email: `dan.whitfield@whitfieldfulfillment.com`
+- Username: `dan_owner` or `owner`
+- Password: `password123`
+
+| Username / Email | Password | Role | Facility Scope |
 | --- | --- | --- | --- |
-| `owner` | `password123` | Owner | *None (All)* |
+| `owner` / `dan.whitfield@whitfieldfulfillment.com` | `password123` | Owner | *None (All)* |
 | `manager.reno` | `password123` | Manager | Reno |
 | `manager.columbus` | `password123` | Manager | Columbus |
 | `staff.reno` | `password123` | Trusted Staff | Reno |
