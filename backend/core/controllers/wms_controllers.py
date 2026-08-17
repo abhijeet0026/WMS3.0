@@ -58,8 +58,22 @@ class WMSController:
             "newhire_columbus": "newhire_columbus",
             "newhire.columbus@whitfieldfulfillment.com": "newhire_columbus",
         }
-        lookup_value = alias_map.get(normalized_identifier.lower(), normalized_identifier)
-        user = self.crud.get_user_by_username(lookup_value)
+
+        lookup_candidates = []
+        normalized_key = normalized_identifier.lower()
+        for candidate in [normalized_identifier, normalized_key, alias_map.get(normalized_key, normalized_identifier)]:
+            if candidate and candidate not in lookup_candidates:
+                lookup_candidates.append(candidate)
+
+        if normalized_key in {"owner", "dan_owner"}:
+            lookup_candidates.extend(["owner", "dan_owner"])
+
+        user = None
+        for candidate in lookup_candidates:
+            user = self.crud.get_user_by_username(candidate)
+            if user:
+                break
+
         from commons.auth import create_access_token, verify_password
 
         if not user or not verify_password(password, user["password_hash"]):

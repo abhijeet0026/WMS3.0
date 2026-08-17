@@ -2,7 +2,16 @@ import {
   InventoryItem, Product, Shipment, Order, AuditLog, LegacyIssue, VoiceAssistantResponse, User
 } from '../types/wms';
 
-const API_BASE = '/v1';
+export const API_BASE = (() => {
+  const configuredUrl = import.meta.env.VITE_API_URL;
+  if (configuredUrl) return `${configuredUrl}/v1`;
+
+  if (typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+    return 'http://localhost:8000/v1';
+  }
+
+  return '/v1';
+})();
 
 export async function fetchInventory(warehouse_id?: string): Promise<InventoryItem[]> {
   const url = warehouse_id && warehouse_id !== 'ALL' 

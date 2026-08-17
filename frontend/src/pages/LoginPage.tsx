@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../api/client';
 import { useAuth } from '../hooks/useAuth';
 import { User } from '../types/wms';
 import '../styles/tokens.css';
@@ -26,7 +27,7 @@ export const LoginPage: React.FC = () => {
 
     try {
       // Attempt backend login endpoint call
-      const response = await fetch('http://localhost:8000/v1/auth/login', {
+      const response = await fetch(`${API_BASE}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

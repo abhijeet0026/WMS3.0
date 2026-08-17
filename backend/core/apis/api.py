@@ -9,6 +9,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import or_
 
 from commons.auth import hash_password
 from commons.logger import logger
@@ -41,15 +42,44 @@ def seed_initial_data():
         if existing_users:
             legacy_hashes = {"hashed_admin123", "admin123", "hashed_password123"}
             needs_update = False
-            expected_demo_names = {
-                "owner", "dan_owner", "manager_reno", "manager_columbus", "staff_reno",
-                "staff_columbus", "newhire_reno", "newhire_columbus"
+            canonical_demo_users = {
+                "dan_owner": "dan.whitfield@whitfieldfulfillment.com",
+                "manager_reno": "manager.reno@whitfieldfulfillment.com",
+                "manager_columbus": "manager.columbus@whitfieldfulfillment.com",
+                "staff_reno": "staff.reno@whitfieldfulfillment.com",
+                "staff_columbus": "staff.columbus@whitfieldfulfillment.com",
+                "newhire_reno": "newhire.reno@whitfieldfulfillment.com",
+                "newhire_columbus": "newhire.columbus@whitfieldfulfillment.com",
             }
-            for user in existing_users:
-                if user.username in expected_demo_names or user.email in {"owner@whitfieldfulfillment.com", "dan.whitfield@whitfieldfulfillment.com"}:
+
+            for username, email in canonical_demo_users.items():
+                user = db.query(User).filter(or_(User.username == username, User.email == email, User.username == "owner", User.email == "owner@whitfieldfulfillment.com")).first()
+                if user:
+                    if user.username != username or user.email != email:
+                        user.username = username
+                        user.email = email
+                        user.full_name = user.full_name or username
+                        needs_update = True
                     if user.password_hash != hash_password(demo_password):
                         user.password_hash = hash_password(demo_password)
                         needs_update = True
+                    if user.role != "OWNER" and username == "dan_owner":
+                        user.role = UserRole.OWNER
+                        needs_update = True
+                    if user.facility_scope is not None and username == "dan_owner":
+                        user.facility_scope = None
+                        needs_update = True
+
+            legacy_owner = db.query(User).filter(User.username == "owner").first()
+            if legacy_owner and legacy_owner.username != "dan_owner":
+                legacy_owner.username = "dan_owner"
+                legacy_owner.email = "dan.whitfield@whitfieldfulfillment.com"
+                legacy_owner.full_name = "Dan Whitfield (Business Owner)"
+                legacy_owner.role = UserRole.OWNER
+                legacy_owner.facility_scope = None
+                legacy_owner.password_hash = hash_password(demo_password)
+                needs_update = True
+
             if needs_update:
                 db.commit()
             logging.info("Database already seeded. Validated demo account credentials for the standard WMS login flow.")
