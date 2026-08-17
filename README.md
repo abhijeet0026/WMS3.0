@@ -263,17 +263,17 @@ Keep skill instructions concise. Put detailed repeatable guidance in `SKILL.md` 
 
 The application is seeded with a 7-account roster for testing different roles and facility scopes. The password for all accounts is `password123`.
 
-The owner demo account is also accepted using the Dan Whitfield email alias:
-- Email: `dan.whitfield@whitfieldfulfillment.com`
-- Username: `dan_owner` or `owner`
-- Password: `password123`
+The app accepts the seeded username values below, and the owner demo account is also accepted using the Dan Whitfield email alias:
+- Email alias: `dan.whitfield@whitfieldfulfillment.com`
+- Seeded username: `dan_owner`
+- Password for all demo accounts: `password123`
 
 | Username / Email | Password | Role | Facility Scope |
 | --- | --- | --- | --- |
-| `owner` / `dan.whitfield@whitfieldfulfillment.com` | `password123` | Owner | *None (All)* |
-| `manager.reno` | `password123` | Manager | Reno |
-| `manager.columbus` | `password123` | Manager | Columbus |
-| `staff.reno` | `password123` | Trusted Staff | Reno |
-| `staff.columbus` | `password123` | Trusted Staff | Columbus |
-| `newhire.reno` | `password123` | New Hire | Reno |
-| `newhire.columbus` | `password123` | New Hire | Columbus |
+| `dan_owner` / `dan.whitfield@whitfieldfulfillment.com` | `password123` | Owner | *None (All)* |
+| `manager_reno` | `password123` | Manager | Reno |
+| `manager_columbus` | `password123` | Manager | Columbus |
+| `staff_reno` | `password123` | Trusted Staff | Reno |
+| `staff_columbus` | `password123` | Trusted Staff | Columbus |
+| `newhire_reno` | `password123` | New Hire | Reno |
+| `newhire_columbus` | `password123` | New Hire | Columbus |
