@@ -151,6 +151,21 @@ npm run dev
 The frontend application will be available at `http://localhost:3000`
 Login screen: `http://localhost:3000/login`
 
+### Demo Login Credentials
+
+Use any of the following demo accounts with the same password:
+
+- Password: `password123`
+- Owner: `dan_owner` (also accepts `owner`)
+- Manager (Reno): `manager_reno`
+- Manager (Columbus): `manager_columbus`
+- Staff (Reno): `staff_reno`
+- Staff (Columbus): `staff_columbus`
+- New Hire (Reno): `newhire_reno`
+- New Hire (Columbus): `newhire_columbus`
+
+Email logins are also supported for each account (for example: `dan.whitfield@whitfieldfulfillment.com`).
+
 ## 🧪 Testing
 
 ### Backend Tests
