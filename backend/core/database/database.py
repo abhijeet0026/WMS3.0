@@ -14,7 +14,16 @@ from commons.logger import logger
 logging = logger(__name__)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DB_PATH = os.path.join(BASE_DIR, "wms.db")
+if os.environ.get("VERCEL"):
+    DB_PATH = "/tmp/wms.db"
+    import shutil
+    if not os.path.exists(DB_PATH):
+        try:
+            shutil.copy2(os.path.join(BASE_DIR, "wms.db"), DB_PATH)
+        except Exception as e:
+            logging.error(f"Failed to copy DB to /tmp: {e}")
+else:
+    DB_PATH = os.path.join(BASE_DIR, "wms.db")
 DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 engine = create_engine(

@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 
 
-BACKEND_DIR = Path(__file__).resolve().parent / "backend"
+BACKEND_DIR = Path(__file__).resolve().parent.parent / "backend"
 backend_path = str(BACKEND_DIR)
 if backend_path not in sys.path:
     # Ensure backend absolute imports like `core.*` and `commons.*` resolve on Vercel.
