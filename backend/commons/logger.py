@@ -10,18 +10,27 @@ import sys
 
 # Ensure logs directory exists
 LOGS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs")
-os.makedirs(LOGS_DIR, exist_ok=True)
+try:
+    os.makedirs(LOGS_DIR, exist_ok=True)
+except Exception:
+    pass
 
-LOG_FILE_PATH = os.path.join(LOGS_DIR, "app.log")
+if os.environ.get("VERCEL"):
+    LOG_FILE_PATH = "/tmp/app.log"
+else:
+    LOG_FILE_PATH = os.path.join(LOGS_DIR, "app.log")
 
 formatter = logging.Formatter(
     fmt="%(asctime)s | %(levelname)-7s | %(name)s | %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-file_handler = logging.FileHandler(LOG_FILE_PATH, encoding="utf-8")
-file_handler.setFormatter(formatter)
-file_handler.setLevel(logging.INFO)
+try:
+    file_handler = logging.FileHandler(LOG_FILE_PATH, encoding="utf-8")
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
+except Exception as e:
+    file_handler = None
 
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setFormatter(formatter)
@@ -44,7 +53,8 @@ def logger(name: str) -> logging.Logger:
     log_instance.setLevel(logging.INFO)
 
     if not log_instance.handlers:
-        log_instance.addHandler(file_handler)
+        if file_handler:
+            log_instance.addHandler(file_handler)
         log_instance.addHandler(console_handler)
 
     return log_instance
