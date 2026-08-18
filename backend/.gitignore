@@ -15,7 +15,7 @@ build/
 logs/
 *.log
 *.sqlite*
-wms.db
+# wms.db
 .DS_Store
 .idea/
 .vscode/
